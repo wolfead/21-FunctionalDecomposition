@@ -90,6 +90,8 @@ while True:
             print()
             number_guesses = int(input('Pick a number'))
             print('You have', number_guesses, ' guesses to figure out the secret word!')
+        else:
+            break
 
     if number_guesses == 0:
         print()
@@ -122,3 +124,5 @@ while True:
             print()
             number_guesses = int(input('Pick a number!'))
             print('You have', number_guesses, ' guesses to figure out the secret word!')
+        else:
+            break
