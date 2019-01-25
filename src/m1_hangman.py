@@ -20,10 +20,39 @@ number_guesses = int(input('Pick a number!'))
 print('You have', number_guesses,' guesses to ', end='')
 print('figure out the secret word!')
 
-def get_guess():
+def get_guess(list):
     print()
     guess = input('Guess a letter!')
     return guess
+
+def win_message():
+    print()
+    print('----------------------------------------')
+    print()
+    print('----------------------------------------')
+    print()
+    print('You Win!')
+    print()
+    print('You solved the word:', secretword)
+    print('with', number_guesses, 'guesses left!')
+    print()
+    print('----------------------------------------')
+    print()
+    print('----------------------------------------')
+
+def lose_message():
+    print()
+    print('----------------------------------------')
+    print()
+    print('----------------------------------------')
+    print()
+    print('Game Over')
+    print()
+    print('The secret word was', secretword, '!')
+    print()
+    print('----------------------------------------')
+    print()
+    print('----------------------------------------')
 
 def check_word(guess, secretword, number_guesses):
     if guess in secretword:
@@ -35,8 +64,12 @@ def check_word(guess, secretword, number_guesses):
         print()
     elif number_guesses == 1:
         print()
-        print('Sorry! There is no', guess, 'in the secret word')
+        print('Sorry! But that was your last guess!')
         print()
+        return 1
+    elif number_guesses == 2:
+        print('Sorry! There is no', guess, 'in the secret word')
+        print('Choose wisely, you only have 1 guess left!')
         return 1
     else:
         print()
@@ -55,23 +88,11 @@ while True:
     for k in range(len(secretarray)):
         print(str(secretarray[k]), end='')
     print()
-    guess = get_guess()
+    guess = get_guess(list)
     if check_word(guess, secretword, number_guesses) == 1:
         number_guesses = number_guesses - 1
     if check_if_win(secretarray,secretword):
-        print()
-        print('----------------------------------------')
-        print()
-        print('----------------------------------------')
-        print()
-        print('You Win!')
-        print()
-        print('You solved the word:', secretword)
-        print('with', number_guesses,'guesses left!')
-        print()
-        print('----------------------------------------')
-        print()
-        print('----------------------------------------')
+        win_message()
         x = input('Do you want to play again?  y/n')
         if x == 'n':
             print()
@@ -94,18 +115,7 @@ while True:
             break
 
     if number_guesses == 0:
-        print()
-        print('----------------------------------------')
-        print()
-        print('----------------------------------------')
-        print()
-        print('Game Over')
-        print()
-        print('The secret word was', secretword, '!')
-        print()
-        print('----------------------------------------')
-        print()
-        print('----------------------------------------')
+        lose_message()
         y = input('Do you want to play again?  y/n')
         if y == 'n':
             print()
